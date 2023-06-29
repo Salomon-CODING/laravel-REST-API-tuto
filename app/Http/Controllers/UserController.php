@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\InscriptionMail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -29,10 +31,17 @@ class UserController extends Controller
         ]);
 
         $utilisateurs = User::create([
-            "name" => $Request["name"],
-            "email" => $Request["email"],
-            "password" => bcrypt($Request["password"])
+            "name" => $utilisateurDonnee["name"],
+            "email" => $utilisateurDonnee["email"],
+            "password" => bcrypt($utilisateurDonnee["password"])
         ]);
+        
+        $info = [
+            "name" => $utilisateurDonnee["name"],
+            "email" => $utilisateurDonnee["email"],
+        ];
+
+        Mail::to($utilisateurDonnee["email"])->send(new InscriptionMail($info));
 
         return response($utilisateurs, 201);
     }

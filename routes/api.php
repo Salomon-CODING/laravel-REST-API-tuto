@@ -35,4 +35,5 @@ Route::group(["middleware" => ["auth:sanctum"]], function() {
 });
 
 // pour gerer l'authentification, il faut aller dans le fichier kernel.php dans (app/http) pour decommenter
-// la ligne qui permettra à "sanctum" de pouvoir travailler avec les tokens
+// la ligne qui permettra à "sanctum" de pouvoir travailler avec les tokens (c'est la ligne qui comporte ceci : "\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class," )
+//c'est la ligne 42

@@ -37,13 +37,17 @@ class CarController extends Controller
             "model" => ["required", "string"],
             "price" => ["required", "numeric"],
             "description" => ["required", "string", "min:3"],
+            "image" => ["required", "mimes:png,jpeg,jpg", "max:4096"],
             "user_id" => ["required", "numeric"]
         ]);
 
+        $path = $request->file("image")->store("public/images");
+        
         $car = Car::create([
             "model" => $carsValidation["model"],
             "price" => $carsValidation["price"],
             "description" => $carsValidation["description"],
+            "image_path" => $path,
             "user_id" => $carsValidation["user_id"]
         ]);
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("model");
             $table->decimal("price", 7, 2, true);
             $table->text("description")->nullable();
+            $table->string("image_path")->nullable(false);
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();

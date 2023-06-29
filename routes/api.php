@@ -32,6 +32,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function() {
     Route::put("/cars/{id}", [CarController::class, "update"]);
     Route::delete("/cars/{id}", [CarController::class, "destroy"]);
     Route::post("/utilisateur/deconnexion", [UserController::class, "deconnexion"]);
+    Route::post("/utilisateur/compte/suppression", [UserController::class, "suppression"]);
 });
 
 // pour gerer l'authentification, il faut aller dans le fichier kernel.php dans (app/http) pour decommenter

@@ -75,4 +75,27 @@ class UserController extends Controller
 
         return response(["message" => "Déconnexion réussie.."], 200);
     }
+
+    public function suppression(Request $Request) {
+        $utilisateurDonnee = $Request->validate([
+            "email" => ["required", "email", "exists:users,email"],
+            "password" => ["required", "string", "min:8", "max:30"],
+            "user_id" => ["required", "numeric"]
+        ]);
+
+        $utilisateur = User::where("email", $utilisateurDonnee["email"])->first();
+
+        if(!Hash::check($utilisateurDonnee["password"], $utilisateur->password))
+        {
+            return response(["message" => "Aucun utilisateur trouvé avec ce mot de passe"], 401);
+        }
+
+        if($utilisateur->id != $utilisateurDonnee["user_id"]) {
+            return response(["message" => "Action interdite"], 403);
+        }
+
+        User::destroy($utilisateurDonnee["user_id"]);
+
+        return response(["message" => "Compte supprimé"], 200);
+    }
 }

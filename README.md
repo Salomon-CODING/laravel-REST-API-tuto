@@ -1,6 +1,6 @@
 Hello..
 
-Notes --
+## Notes 
 
 Consommation d'une API :
 - On obtient d'abord le token en communiquant avec l'api d'authentification
